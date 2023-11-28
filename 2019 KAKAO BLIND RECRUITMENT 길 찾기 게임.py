@@ -1,16 +1,25 @@
-from collections import deque
-def solution(nodeinfo,root_x):
-    global later
+import sys
+sys.setrecursionlimit(10**6)
+# 6번,7번 런타임 에러 <- 재귀 최대 1000번인데 노드가 100000개라 늘려줘야함
+def solution(nodeinfo):
+    global later,pre
     later=[]
-    def make_tree(arr):
-        global later
-        temp_y=nodeinfo[0][1]
+    pre=[]
+    def make_tree(arr,root_x):
+        global later,pre
+        if not arr :
+            return
+        if len(arr)==1 :
+            pre.append(arr[0][2])
+            later.append(arr[0][2])
+            return
+        temp_y=arr[0][1]
         root_list=[]
-        for i in range(len(nodeinfo)):
-            if nodeinfo[i][1]==temp_y:
-                root_list.append(nodeinfo[i])
+        for i in range(len(arr)):
+            if arr[i][1]==temp_y:
+                root_list.append(arr[i])
             else:
-                nodeinfo=nodeinfo[i:]
+                nodeinfo=arr[i:]
                 break
 
         if len(root_list)==1:
@@ -21,39 +30,24 @@ def solution(nodeinfo,root_x):
                     l.append(nodeinfo[i])
                 else:
                     r.append(nodeinfo[i])
-
-        else:
-            l, lr, rl, rr = [], [], [], []
-            ll_x,lr_x,rl_x,rr_x=
-            for i in range(len(nodeinfo)):
-
-
-
-
-
+            pre.append(root_list[0][2])
+            make_tree(l,c_x)
+            make_tree(r,c_x)
+            later.append(root_list[0][2])
+            return
 
     cnt=1
-    answer = [[]]
+    answer = []
     for i in range(len(nodeinfo)):
         nodeinfo[i].append(cnt)
         cnt+=1
     nodeinfo.sort(key=lambda x: (-x[1],x[0]))
-    print(nodeinfo)
-    tree={}
-    q=deque([])
-    pre=[nodeinfo[0][2]]
-    root_y=nodeinfo[1]
-    root_list=[nodeinfo[0]]
-    for i in range(1,len(nodeinfo)):
-        pre.append(nodeinfo[i][2])
-        if nodeinfo[i][1]<root_y:
-            root_list=temp[:]
-        else:
-            for j in range(len(root_list)):
 
 
-            temp.append(nodeinfo[i])
-
+    make_tree(nodeinfo,0)
+    answer.append(pre)
+    answer.append(later)
     return answer
 
-a=solution([[5,3],[11,5],[13,3],[3,5],[6,1],[1,3],[8,6],[7,2],[2,2]])
+a=solution([[5,3]])
+print(a)
