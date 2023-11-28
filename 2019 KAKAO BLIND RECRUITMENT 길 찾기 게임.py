@@ -42,8 +42,6 @@ def solution(nodeinfo):
         nodeinfo[i].append(cnt)
         cnt+=1
     nodeinfo.sort(key=lambda x: (-x[1],x[0]))
-
-
     make_tree(nodeinfo,0)
     answer.append(pre)
     answer.append(later)
