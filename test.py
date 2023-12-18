@@ -1,2 +1,5 @@
-a=[1,2,3,4]
-print(-1%60)
+a=[1,2,3,5]
+print(a.pop())
+print(a.pop())
+print(a.pop())
+enumerate
